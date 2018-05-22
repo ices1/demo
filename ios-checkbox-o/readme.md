@@ -66,9 +66,9 @@
     box-shadow:扩散向（默认外扩），x向阴影，y向阴影，模糊，扩散半径
 
     /*如以下为内扩散17象素*/
-    box-shadow: inset 0 0 0 17px #6ddc5f；
+    box-shadow: inset 0 0 0 17px #6ddc5f;
     /*如以下为y方向（向下）1px阴影，模糊面积为2px*/
-    box-shadow: 0 1px 2px #3337
+    box-shadow: 0 1px 2px #3337;
   ```
 
 具体如下：

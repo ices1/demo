@@ -1,7 +1,7 @@
 # ios-checkbox
 
 [在线地址](https://ices1.github.io/demo/ios-checkbox-o/index.html)
-![图片](https://github.com/ices1/demo/ios-checkbox-o/1.gif)
+![图片](https://raw.githubusercontent.com/ices1/demo/master/ios-checkbox-o/1.gif)
 
 ### What
   纯CSS制作一个 ios 的样式 checkbox

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ios-checkbox</title>
+  <style>
+    body{                   /*演示代码*/
+      padding: 20px calc(50% - 77px) ;    
+    }                       
+    *{                      /* 演示代码 */
+      zoom:1.5;
+    }
+    input.ios-checkbox{
+      display: none;
+    }
+    label.ios-checkbox{
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      padding: 2px;
+      background: #ddd;
+      border-radius: 999px;
+      position: relative;
+      transition: .5s;
+    }
+    label.ios-checkbox::after{
+      content: '';
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      background-color: #fff;
+      left: 2px;
+      position: absolute;
+      box-shadow: 0 1px 2px #3337;
+      transition: .5s;
+    }
+    input.ios-checkbox:checked + label.ios-checkbox{
+      box-shadow: 0 0 0 17px  #6ddc5f inset;
+    }
+    input.ios-checkbox:checked + label.ios-checkbox::after{
+      left: 32px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <input class="ios-checkbox" type="checkbox" name="" id="ios-checkbox">
+    <label class="ios-checkbox" for="ios-checkbox"></label>
+  </section>
+</body>
+</html>

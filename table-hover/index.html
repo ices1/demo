@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="refresh" content="1"> -->
+  <title>Document</title>
+  <style>
+    table,ul{
+      background-color: rgb(255,0,0,0.1);
+    }
+    .table-hover{
+      border-collapse: collapse;
+      /*background-color: #fff;*/
+    }
+    .table-hover td{
+      width: 50px;
+      height: 50px;
+    }
+    .table-hover td:hover{
+      border: 5px red solid;
+    }
+    /*问题：宽度，样式不同，此处table边框合并后，以对应边以左，上为准，（单元格左，上边框均为共用框）*/
+    .table-hover-original td{
+      border: 5px #fff solid;
+    }
+
+    /*方法一：宽度样式相同，比来源，此处solid优先级高于ridge，hover有效*/
+    .table-hover-ridge td{
+      border: 5px #fff ridge
+    }
+
+    /*方法二：宽度样式相同，比来源，此处设定tr，col边框属性，深层td目录边框优先级更高，hover有效*/
+    .table-hover-col tr, col{
+      border: 5px #fff solid;
+    }
+    /*方法三：边框shadow*/
+    .table-hover-shadow td{
+      background: yellow;
+      /*box-shadow: 0 0 0 2px;*/
+      border: 1px #fff solid;
+    }
+    .table-hover-shadow tr td:hover{
+      position: relative;
+      box-shadow: 0 0 0 2px red;
+      z-index: 100;
+      border: 1px #fff solid;
+
+    }
+
+    /*方法四：有ul列表浮动*/
+    .li-hover-float{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 165px;
+      padding-left: 5px;    /*补偿 li 的 margin-left：-5px*/
+      padding-bottom: 5px;  /*补偿 li 的 margin-bottom：-5px*/
+      display: flow-root;
+    }
+    .li-hover-float li{
+      float: left;
+      width: 50px;
+      height: 50px;
+      border: 5px #fff solid;
+      margin: 0 0 -5px -5px;
+      position: relative;   /*相对定位，配合 z-index 使hover时自身border显示出来*/
+    }
+    .li-hover-float li:hover{
+      border-color: red;
+      z-index: 100;
+    }
+
+    /*方法五：有ul列表行内，大致与float相同*/
+    .li-hover-inline{
+      font-size: 0;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 165px;
+      padding-left: 5px;
+      padding-bottom: 5px; 
+    }
+    .li-hover-inline li{
+      font-size: 16px;
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 5px #fff solid;
+      margin: 0 0 -5px -5px;
+      position: relative;
+    }
+    .li-hover-inline li:hover{
+      border-color: red;
+      z-index: 100;
+    }
+
+
+  </style>
+</head>
+<body>
+  <h2>问题描述：宽度，样式不同，table边框合并后，以对应边以左，上为准（单元格左，上边框均为共用框），hover效果不佳</h2>
+  <table class="table-hover table-hover-original">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </table>
+  <h3>使用table解题思路：遵循宽度相同比样式，样式相同比来源，此处要改变hover时样式，就加大来源相对优先级</h3>
+  <h4>方法一：此处solid优先级高于ridge，hover有效</h4>
+  <p>缺点：hover前后，border样式改变（除颜色外） ～vvvv</p>
+  <table class="table-hover table-hover-ridge">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </table>
+  <h4>方法二：设定tr，col边框属性，深层td目录边框优先级更高，hover有效</h4>
+  <p>缺点：要在table中新增col标签，略麻烦  ～vvvv </p>
+  <table class="table-hover table-hover-col">
+    <col>
+    <col>
+    <col>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </table>
+  <h4>方法三：设定box-shadow属性，hover时覆盖边框</h4>
+  <p>缺点：因为设置shadow后，临近元素会相互影响，如果需要调至hover前后元素间隔仅颜色变化，宽度不变，此效果不佳 ～vvv</p>
+  <table class="table-hover table-hover-shadow">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </table>
+  <h3>以下为 Float 浮动 方法</h3>
+  <h4>方法四：有ul列表浮动，使用 relative 定位 和 z-index 显示hover效果</h4>
+  <p>优点：流式布局，便于添加新增项 ～vvvvv</p>
+  <section>
+    <ul class="li-hover-float">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+    </ul>
+  </section>
+  <h3>以下为 inline 行内 方法</h3>
+  <h4>方法五：有ul列表行内，</h4>
+  <p>优点：大致与float相同 ～vvvvv</p>
+  <section>
+    <ul class="li-hover-inline">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+    </ul>
+  </section>
+  <h4>方法六：使用 Position 定位，border重叠部分再 z-index ，与行内，浮动类似 ～vvvv</h4>
+  <p>略</p>
+</body>
+</html>

@@ -1,0 +1,152 @@
+
+/*data-balloon基本属性*/
+[data-balloon]{
+  position: relative;
+}
+[data-balloon]::before{
+  content: attr(data-balloon);
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  z-index: 10;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+}
+[data-balloon]::after{
+  content: '';
+  position: absolute;
+  border: 10px solid transparent;
+  z-index: 10;
+}
+
+/*给定默认设定, data-balloon的缺省值，状态为position:top,width:auto*/
+[data-balloon]::before,
+[data-balloon]::after{
+  white-space: nowrap;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);   
+}
+[data-balloon]::after{
+  transform: translate(-50%,100%);
+  border-top-color: #000f; 
+}
+
+/*data-balloon hover前后变化样式*/
+[data-balloon]::before,[data-balloon]::after{
+  opacity: 0;
+  /*注意: display: none|block 不能渐变，visibility: visible|hidden 可以渐变*/
+  visibility: hidden;
+  margin: 0;
+  transition: .2s;
+  pointer-events: none;
+}
+[data-balloon]:hover[data-balloon]::before,[data-balloon]:hover[data-balloon]::after,[data-balloon-visible][data-balloon]::after,[data-balloon-visible][data-balloon]::before{
+  opacity: 1;
+  visibility: visible;
+  margin: 20px 0;
+}
+[data-balloon-pos="left"]:hover[data-balloon]::before,[data-balloon-pos="left"]:hover[data-balloon]::after{
+  margin: 0 20px;
+}
+[data-balloon-pos="right"]:hover[data-balloon]::before,[data-balloon-pos="right"]:hover[data-balloon]::after{
+  margin: 0 20px;
+}
+
+
+/*方位设置*/
+
+[data-balloon-pos="up"][data-balloon]::before,
+[data-balloon-pos="up"][data-balloon]::after{
+  bottom: 100%;
+  /*居中对齐*/
+  left: 50%;
+  transform: translateX(-50%);
+}
+/*小三角块*/
+[data-balloon-pos="up"][data-balloon]::after{
+  transform: translate(-50%,100%);
+  border-top-color: #000f; 
+}
+
+[data-balloon-pos="down"][data-balloon]::before,
+[data-balloon-pos="down"][data-balloon]::after{
+  /*清楚默认继承before*/
+  bottom: initial;
+
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+[data-balloon-pos="down"][data-balloon]::after{
+  /*清楚默认继承after*/
+  border-top-color: #0000; 
+
+  transform: translate(-50%,-100%);
+  border-bottom-color: #000f; 
+}
+[data-balloon-pos="left"][data-balloon]::before,
+[data-balloon-pos="left"][data-balloon]::after{
+  /*清楚默认继承before*/
+  bottom: initial;
+  left: initial;
+  transform: initial;  
+
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+[data-balloon-pos="left"][data-balloon]::after{
+  /*清楚默认继承before*/
+  border-top-color: #0000; 
+
+  transform: translate(100%,-50%);
+  border-left-color: #000f; 
+}
+[data-balloon-pos="right"][data-balloon]::before,
+[data-balloon-pos="right"][data-balloon]::after{
+  /*清楚默认继承before*/
+  bottom: initial;
+  left: initial;
+  transform: initial;  
+
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+
+  /*注意 translate(tx[, ty]), 若ty没指定将默认设定tx， 以下两个不一样
+  transform: translate(-50%);
+  transform: translate(-50%,-50%);*/
+}
+[data-balloon-pos="right"][data-balloon]::after{
+  /*清楚默认继承before*/
+  border-top-color: #0000; 
+
+  transform: translate(-100%,-50%);
+  border-right-color: #000f; 
+}
+
+/*pos大小设置*/
+
+[data-balloon-length="fit"][data-balloon]::before{
+  width: 100%;
+  white-space: normal;
+}
+[data-balloon-length="small"][data-balloon]::before{
+  width: 80px;
+  white-space: normal;
+}
+[data-balloon-length="medium"][data-balloon]::before{
+  width: 150px;
+  white-space: normal;
+}
+[data-balloon-length="large"][data-balloon]::before{
+  width: 260px;
+  white-space: normal;
+}
+[data-balloon-length="xlarge"][data-balloon]::before{
+  width: 380px;
+  white-space: normal;
+}

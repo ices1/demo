@@ -1,13 +1,13 @@
 ## Balloon.css
-在线地址
-Balloon页面仿制
-![balloon.css](jjjjjjjjjjj)
+[在线地址](https://ices1.github.io/demo/balloon.css/index.html)
+[Balloon页面仿做](https://ices1.github.io/demo/balloon.css/balloon-clone.html)
+![balloon.css](https://raw.githubusercontent.com/ices1/demo/master/balloon.css/balloon.gif)
 
 ### What
 实现元素 `hover` 时 弹出 `tooltip` 提示框
 
 ### which
-伪元素、水平垂直定位、 `Transform` 变换、 `Visibility|display` 、 `flex` 自适应、 `@media` 响应式
+伪元素、 `Transform` 变换、 `flex` 自适应、 `@media` 响应式
 
 ### How
 `data-balloon` ->提示内容 `data-balloon-length`-> 提示长度 `data-balloon-pos`-> 提示方向 

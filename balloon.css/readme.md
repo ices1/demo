@@ -43,13 +43,13 @@
 	  visibility: visible;
 	}
  ```
-- 注意 translate(tx[, ty]), 若ty没指定将默认设定为0， 以下两个不一样
-  ```css
+- 若 translate(tx[, ty]), 若ty没指定将默认设定为0， 以下两个不一样
+```css
 	[data-balloon-pos="up"]::before{
 	  transform: translate(-50%);			/*等效于translate(-50%,0)*/
 	  transform: translate(-50%,-50%);
 	}
-  ```
+```
 
 ### Balloon页面-响应式布局
 
